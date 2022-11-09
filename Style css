@@ -1,36 +1,52 @@
-.time-box{
-    text-align: center;
-    width: 500px;
-    height:100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    align-self: center;
-    border-radius: 30px;
-    margin: 20px 0;
-    padding-left: 20px;
-    padding-right: 10px;
-    font-size: 40px;
-    background-color: aliceblue;
-    color: black;
-}
-.dynamic_bg{
-    height: 300px;
-    width: 300px;
-}
-.box{
-    position: relative;
-}
-.road-img{
-    height: 400px;
-    width: 100%;
-}
-.car-img{
-    position: absolute;
-    left: 0;
-    bottom: 50px;
-    width: 200px;
-}
-.stud{
-    font-size: 30px;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+<div>
+<fieldset>
+   <legend><h1>Digital Clock</h1></legend>
+   <div id="time" class="time-box"></div>
+   <button onclick="start()">Current time</button>
+</fieldset>
+</div>
+<div>
+    <fieldset>
+    <legend><h1>Dynamic Background</h1></legend>
+    <div class="dynamic_bg" onload="color_ch()"></div>
+    </fieldset>
+</div>
+<div>
+<fieldset>
+    <legend><h1>Changing Font Size</h1></legend>
+    <p id="para1" onmouseover="incSize()" onmouseout="decSize()">move cursor over me to zoom in</p>
+</fieldset>
+</div>
+<div>
+    <fieldset>
+    <legend><h1>Move Car</h1></legend>
+    <div class="box">
+        <img src="https://i.pinimg.com/originals/f5/05/24/f50524ee5f161f437400aaf215c9e12f.jpg" class="road-img" id="r-img">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvZ3heaBhZrKdfAmkarUrqMVlqmltTVbYmjA&usqp=CAU" class="car-img" id="c-img">
+    </div>
+    <button onclick="init(); moveRight();">Move</button>
+    <button onclick="stop()">Stop</button>
+    </fieldset>
+</div>
+<div>
+    <fieldset>
+    <legend><h1>Student Details</h1></legend>
+    <button onclick="student()">Show Student Details</button>
+    <span id="stu1" class="stud"></span>
+    <span id="stu2" class="stud"></span>
+    </fieldset>
+</div>
+   <script src="script.js"></script>
+</body>
+</html>
