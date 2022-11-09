@@ -1,52 +1,64 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
-    
-</head>
-<body>
-<div>
-<fieldset>
-   <legend><h1>Digital Clock</h1></legend>
-   <div id="time" class="time-box"></div>
-   <button onclick="start()">Current time</button>
-</fieldset>
-</div>
-<div>
-    <fieldset>
-    <legend><h1>Dynamic Background</h1></legend>
-    <div class="dynamic_bg" onload="color_ch()"></div>
-    </fieldset>
-</div>
-<div>
-<fieldset>
-    <legend><h1>Changing Font Size</h1></legend>
-    <p id="para1" onmouseover="incSize()" onmouseout="decSize()">move cursor over me to zoom in</p>
-</fieldset>
-</div>
-<div>
-    <fieldset>
-    <legend><h1>Move Car</h1></legend>
-    <div class="box">
-        <img src="https://i.pinimg.com/originals/f5/05/24/f50524ee5f161f437400aaf215c9e12f.jpg" class="road-img" id="r-img">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvZ3heaBhZrKdfAmkarUrqMVlqmltTVbYmjA&usqp=CAU" class="car-img" id="c-img">
-    </div>
-    <button onclick="init(); moveRight();">Move</button>
-    <button onclick="stop()">Stop</button>
-    </fieldset>
-</div>
-<div>
-    <fieldset>
-    <legend><h1>Student Details</h1></legend>
-    <button onclick="student()">Show Student Details</button>
-    <span id="stu1" class="stud"></span>
-    <span id="stu2" class="stud"></span>
-    </fieldset>
-</div>
-   <script src="script.js"></script>
-</body>
-</html>
+function Currenttime(){
+    var d = new Date();
+    var h = d.getHours();
+    var m = d.getMinutes();
+    var s = d.getSeconds();
+    var period="AM";
+    if (h > 12) {
+        period = "PM";
+    }
+    var time = h+ ":" + m + ":" + s +""+period;
+    document.getElementById('time').innerHTML = time;
+}
+function start(){
+    setInterval("Currenttime()", 1000);
+}
+function color_ch() {
+    var red = Math.floor(Math.random() * 255);
+    var blue = Math.floor(Math.random() * 255);
+    var green = Math.floor(Math.random() * 255);
+    var color = "rgb(" + red + "," + green + "," + blue + ")";
+
+    document.getElementsByClassName("dynamic_bg")[0].style = "background-color:" + color;
+    setTimeout(color_ch, 2000);
+}
+color_ch();
+
+function incSize() {
+    document.getElementById('para1').style.fontSize = "28px";
+}
+function decSize() {
+    document.getElementById('para1').style.fontSize = "15px";
+}
+
+function init() {
+    imgobj = document.getElementById('c-img');
+    imgobj.style.left = '0px';
+}
+function moveRight() {
+    imgobj.style.left = parseInt(imgobj.style.left) + 1 + 'px';
+    animate = setTimeout('moveRight()', 10);
+
+    if (parseInt(imgobj.style.left) >= 1300) {
+        stop();
+    }
+}
+function stop() {
+    clearTimeout(animate);
+    imgobj.style.left = '0px';
+}
+function student() {
+    var stu_obj = [
+        { name: 'John', r_num: '123', dob: '20-apr-1995' },
+        { name: 'Joseph', r_num: '456', dob: '05-jan-1998' }
+    ];
+
+    for (var i = 0; i < stu_obj.length; i++) {
+        var n = stu_obj[i].name;
+        var r = stu_obj[i].r_num;
+        var d = stu_obj[i].dob;
+        var str = "<br>" + "Name: " + n + "<br>" + "Register Number: " + r + "<br>" + "Date Of Birth: " + d + "<br>";
+        document.getElementById('stu' + (i+1)).innerHTML = str;
+
+    }
+}
